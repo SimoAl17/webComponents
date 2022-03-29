@@ -1,0 +1,27 @@
+{
+  "name": "webcomponents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimoAl17/webComponents.git"
+  },
+  "author": "simoal17",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimoAl17/webComponents/issues"
+  },
+  "homepage": "https://github.com/SimoAl17/webComponents#readme",
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "snowpack": "^3.8.8"
+  }
+}

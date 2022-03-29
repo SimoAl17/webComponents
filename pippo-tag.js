@@ -1,5 +1,4 @@
-class PippoTag extends HTMLElement{
-
+class PippoTag extends HTMLElement {
     styleTemplate = `
     .par{
         color: green;
@@ -8,7 +7,7 @@ class PippoTag extends HTMLElement{
     htmlTemplate = `
         <h2>#USERNAME</h2>
         <h2>#MAIL</h2>
-    `
+    `;
 
     // user = {
     //     name: "Andrea",
@@ -17,7 +16,7 @@ class PippoTag extends HTMLElement{
 
     constructor() {
         super();
-        this.attachShadow({mode: 'open'});
+        this.attachShadow({ mode: 'open' });
         this.getAttributes();
         this.initStyle();
         this.initTag();
@@ -39,35 +38,37 @@ class PippoTag extends HTMLElement{
     }
 
     initTag() {
-
         if (this.user) {
-            this.htmlTemplate = this.htmlTemplate.replace('#USERNAME', this.user.name);
+            this.htmlTemplate = this.htmlTemplate.replace(
+                '#USERNAME',
+                this.user.name,
+            );
             this.htmlTemplate = this.htmlTemplate.replace('#MAIL', this.user.mail);
-    
-            this.shadowRoot.innerHTML = this.htmlTemplate;    
+
+            this.shadowRoot.innerHTML = this.htmlTemplate;
         }
 
         if (this.hasButton) {
             const button = document.createElement('button');
             const node = document.createTextNode('selectUser');
-    
+
             button.appendChild(node);
             button.onclick = () => this.buttonClicked();
-    
-            this.shadowRoot.appendChild(button); 
+
+            this.shadowRoot.appendChild(button);
         }
-        
-        // const node = document.createTextNode('Pippo');
-        // const p = document.createElement('p');
-        // p.className = 'par';
-        // p.appendChild(node);
-        // this.shadowRoot.appendChild(p);
+
+    // const node = document.createTextNode('Pippo');
+    // const p = document.createElement('p');
+    // p.className = 'par';
+    // p.appendChild(node);
+    // this.shadowRoot.appendChild(p);
     }
 
     buttonClicked() {
         const event = new CustomEvent('user-selected', {
             bubbles: true,
-            detail: this.user
+            detail: this.user,
         });
         this.dispatchEvent(event);
     }
@@ -78,7 +79,7 @@ class PippoTag extends HTMLElement{
     }
 
     static get observedAttributes() {
-        return ['pippo-user', 'has-button']; 
+        return ['pippo-user', 'has-button'];
     }
 }
 
