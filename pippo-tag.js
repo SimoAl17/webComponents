@@ -23,13 +23,13 @@ class PippoTag extends HTMLElement{
         this.initTag();
     }
 
-    attributeChangedCallback() {
-        this.getAttributes();
-        this.initTag();
-    }
-
-    static get observedAttributes() {
-        return ['pippo-user']; 
+    getAttributes() {
+        if (this.getAttribute('pippo-user')) {
+            this.user = JSON.parse(this.getAttribute('pippo-user'));
+        }
+        if (this.getAttribute('has-button')) {
+            this.hasButton = this.getAttribute('has-button') === 'true';
+        }
     }
 
     initStyle() {
@@ -47,15 +47,14 @@ class PippoTag extends HTMLElement{
             this.shadowRoot.innerHTML = this.htmlTemplate;    
         }
 
-        const button = document.createElement('button');
-        const node = document.createTextNode('selectUser');
-
-        button.appendChild(node);
-        button.onclick = () => this.buttonClicked();
-
-        this.shadowRoot.appendChild(button);
         if (this.hasButton) {
-            
+            const button = document.createElement('button');
+            const node = document.createTextNode('selectUser');
+    
+            button.appendChild(node);
+            button.onclick = () => this.buttonClicked();
+    
+            this.shadowRoot.appendChild(button); 
         }
         
         // const node = document.createTextNode('Pippo');
@@ -73,13 +72,13 @@ class PippoTag extends HTMLElement{
         this.dispatchEvent(event);
     }
 
-    getAttributes() {
-        if (this.getAttribute('pippo-user')) {
-            this.user = JSON.parse(this.getAttribute('pippo-user'));
-        }
-        if (this.getAttribute('has-button')) {
-            this.hasButton = this.getAttribute('has-button') = 'true';
-        }
+    attributeChangedCallback() {
+        this.getAttributes();
+        this.initTag();
+    }
+
+    static get observedAttributes() {
+        return ['pippo-user', 'has-button']; 
     }
 }
 
